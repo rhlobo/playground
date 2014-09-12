@@ -1,0 +1,10 @@
+#!/bin/bash
+
+
+source "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/.base"
+
+cd "${PROJECT_LOCATION}"
+watchmedo shell-command --recursive --ignore-directories --patterns="*.py" --command='bin/testfile "${watch_src_path}" "${watch_event_type}"'
+### ALTERNATIVE (with nose-watch):
+### watchmedo shell-command -R -p "*.py" -c "nosetests --with-watch" "${PROJECT_NAME}"
+cd "${CURRDIR}"

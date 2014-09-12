@@ -1,0 +1,8 @@
+#!/bin/bash
+
+
+source "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/.base"
+
+cd "${PROJECT_LOCATION}"
+find -name '*.rst' -type f -print0 | xargs -I{} -0 rst2html {} output/{}.html
+cd "${CURRDIR}"

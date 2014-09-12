@@ -1,0 +1,30 @@
+#!/bin/bash
+
+
+export TESTTYPE=${1:-fast}
+source "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/.base"
+
+EVENT="$2"
+[ "${EVENT}" == "modified" ] || exit
+
+FILEPATH=$1
+FILEDIR=$(dirname "${FILEPATH}")
+FILENAME=$(basename "${FILEPATH}")
+SIMPLENAME="${FILENAME%%.*}"
+TEST_FILEPATH="$(dirname $1)/tests/${SIMPLENAME}_tests.py"
+
+[[ "${FILEPATH}" == *"tests.py"* ]] && TEST_FILE="${FILEPATH}"
+[ -f "${TEST_FILEPATH}" ] && TEST_FILE="${TEST_FILEPATH}"
+[ -f "${TEST_FILE}" ] || TEST_FILE=""
+
+
+[[ -z "$TEST_FILE" ]] && exit
+
+
+cd "${PROJECT_LOCATION}"
+echo
+echo
+echo "Testing '${TEST_FILE}'"
+nosetests "$TEST_FILE" || echo "ha!"
+pep8 --first --max-line-length=160 "$TEST_FILE"
+cd "${CURRDIR}"
