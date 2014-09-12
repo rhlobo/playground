@@ -31,16 +31,17 @@ sudo apt-get install --yes --quiet python-profiler
 pip install -U sphinx
 
 ### MISC PROJECT / SCIPY DEPENDENCIES
-#pip install -U --install-option="--prefix=${VIRTUAL_ENV}" cython
 pip install -U Cython
 pip install -U pytz
 pip install -U python-dateutil
 
 #### NUMPY
 sudo apt-get install --yes --quiet libatlas-base-dev liblapack-dev
-mkdir -p "${VIRTUAL_ENV}/local"
-rm -Rf "${VIRTUAL_ENV}/local/lib"
-ln -s "${VIRTUAL_ENV}/lib" "${VIRTUAL_ENV}/local/lib"
+if [ -n "${VIRTUAL_ENV}" ]; then
+    mkdir -p "${VIRTUAL_ENV}/local"
+    rm -Rf "${VIRTUAL_ENV}/local/lib"
+    ln -s "${VIRTUAL_ENV}/lib" "${VIRTUAL_ENV}/local/lib"
+fi
 pip install -U numpy
 
 #### NUMPY COMPLEMENTARY PACKAGES
