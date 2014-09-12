@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export PROJECT_NAME='machinelearning'
+export PROJECT_NAME='playground'
 
 export CURRDIR="$(pwd)"
 export PROJECT_LOCATION="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd .. && pwd )"
